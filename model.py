@@ -47,7 +47,7 @@ self.l3 = nn.Linear(10,2)
         return x
     
 model = Masknotes().to(device) # just send to gpu mem
-
+model.load_state_dict(torch.load("model.pth"))
 loss_metric = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(),lr=learn_rate)
 
@@ -84,3 +84,4 @@ for batch_num, (imgs, labels) in enumerate(dataloaded):
     #epoch break
     if count_epoch == epochs:
         break
+torch.save(model.state_dict(), "model.pth")
